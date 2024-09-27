@@ -1,0 +1,1825 @@
+openapi: 3.0.1
+info:
+  title: Agoda.DevLocalMetrics
+  version: v1
+paths:
+  /dotnet:
+    post:
+      tags:
+        - Dotnet
+      operationId: DotnetCollectData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DotnetMsBuild'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DotnetMsBuild'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DotnetMsBuild'
+      responses:
+        '200':
+          description: Success
+  /dotnet/nunit:
+    post:
+      tags:
+        - Dotnet
+      operationId: Dotnet_CollectNUnitTestData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NUnitTestCasePayload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NUnitTestCasePayload'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/NUnitTestCasePayload'
+      responses:
+        '200':
+          description: Success
+  /gradletalaiot:
+    post:
+      tags:
+        - GradleTalaiot
+      operationId: GradleTalaiotCollectData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradleTalaiot'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GradleTalaiot'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GradleTalaiot'
+      responses:
+        '200':
+          description: Success
+  /api/health:
+    get:
+      tags:
+        - HealthCheck
+      operationId: HealthCheck_Index
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /version:
+    get:
+      tags:
+        - HealthCheck
+      operationId: Version
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssemblyInfo'
+        '500':
+          description: Server Error
+          x-ms-error-response: true
+  /jest:
+    post:
+      tags:
+        - Jest
+      operationId: JestCollectData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JestTestCasePayload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/JestTestCasePayload'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/JestTestCasePayload'
+      responses:
+        '200':
+          description: Success
+  /junit:
+    post:
+      tags:
+        - JUnit
+      operationId: JUnit_ReceiveTestRun
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRunData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TestRunData'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TestRunData'
+      responses:
+        '200':
+          description: Success
+  /scala:
+    post:
+      tags:
+        - ScalaSbt
+      operationId: ScalaSbt_CollectData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalaProfileData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ScalaProfileData'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ScalaProfileData'
+      responses:
+        '200':
+          description: Success
+  /scala/testdata:
+    post:
+      tags:
+        - ScalaSbt
+      operationId: ScalaSbt_CollectTestData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalaTestCasePayload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ScalaTestCasePayload'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ScalaTestCasePayload'
+      responses:
+        '200':
+          description: Success
+  /scala/scalatest:
+    post:
+      tags:
+        - ScalaSbt
+      operationId: ScalaSbt_CollectScalaTestData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScalaTestPayload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ScalaTestPayload'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ScalaTestPayload'
+      responses:
+        '200':
+          description: Success
+  /testdata/junit:
+    post:
+      tags:
+        - TestData
+      operationId: TestData_JUnit
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                GitProjectUrl:
+                  type: string
+                Id:
+                  type: string
+                Username:
+                  type: string
+                CpuCount:
+                  type: integer
+                  format: int32
+                Hostname:
+                  type: string
+                Os:
+                  type: string
+                OsVersion:
+                  type: string
+                Branch:
+                  type: string
+                ProjectName:
+                  type: string
+                Repository:
+                  type: string
+                RepositoryName:
+                  type: string
+                GitCommitDate:
+                  type: string
+                  format: date-time
+                GitHeadCommit:
+                  type: string
+                TestRunner:
+                  type: string
+                TestRunnerVersion:
+                  type: string
+            encoding:
+              files:
+                style: form
+              GitProjectUrl:
+                style: form
+              Id:
+                style: form
+              Username:
+                style: form
+              CpuCount:
+                style: form
+              Hostname:
+                style: form
+              Os:
+                style: form
+              OsVersion:
+                style: form
+              Branch:
+                style: form
+              ProjectName:
+                style: form
+              Repository:
+                style: form
+              RepositoryName:
+                style: form
+              GitCommitDate:
+                style: form
+              GitHeadCommit:
+                style: form
+              TestRunner:
+                style: form
+              TestRunnerVersion:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JUnitFailure'
+  /vite:
+    post:
+      tags:
+        - Vite
+      operationId: ViteCollectData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViteBuild'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ViteBuild'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ViteBuild'
+      responses:
+        '200':
+          description: Success
+  /vitest:
+    post:
+      tags:
+        - Vitest
+      operationId: VitestCollectData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VitestPayload'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/VitestPayload'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/VitestPayload'
+      responses:
+        '200':
+          description: Success
+  /webpack:
+    post:
+      tags:
+        - Webpack
+      operationId: WebpackCollectData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebpackStats'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WebpackStats'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/WebpackStats'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    AssemblyInfo:
+      required:
+        - version
+      type: object
+      properties:
+        version:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    DotnetMsBuild:
+      required:
+        - branch
+        - cpuCount
+        - date
+        - hostname
+        - id
+        - os
+        - platform
+        - projectName
+        - repository
+        - repositoryName
+        - timeTaken
+        - type
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: integer
+          format: int32
+        os:
+          type: string
+          nullable: true
+        timeTaken:
+          type: string
+          nullable: true
+        branch:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        repository:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Error:
+      required:
+        - matcherResult
+      type: object
+      properties:
+        matcherResult:
+          $ref: '#/components/schemas/MatcherResult'
+      additionalProperties: false
+    FailureDetail:
+      required:
+        - actual
+        - error
+        - expected
+        - matcherName
+        - message
+        - passed
+        - stack
+      type: object
+      properties:
+        actual:
+          type: string
+          nullable: true
+        error:
+          $ref: '#/components/schemas/Error'
+        expected:
+          type: string
+          nullable: true
+        matcherName:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        passed:
+          type: boolean
+        stack:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GradleTalaiot:
+      required:
+        - configurationDurationMs
+        - cpuCount
+        - date
+        - durationMs
+        - gitBranch
+        - gitUser
+        - gradleVersion
+        - hostName
+        - id
+        - ideVersion
+        - javaMaxPermSize
+        - javaRuntime
+        - javaVmName
+        - javaXmsBytes
+        - javaXmxBytes
+        - localCacheHit
+        - localCacheMiss
+        - locale
+        - maxWorkers
+        - osManufacturer
+        - osVersion
+        - publicIp
+        - remoteCacheHit
+        - remoteCacheMiss
+        - requestedTasks
+        - rootProject
+        - success
+        - totalRamAvailableBytes
+        - username
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        cpuCount:
+          type: string
+          nullable: true
+        osVersion:
+          type: string
+          nullable: true
+        maxWorkers:
+          type: string
+          nullable: true
+        javaRuntime:
+          type: string
+          nullable: true
+        javaVmName:
+          type: string
+          nullable: true
+        javaXmsBytes:
+          type: string
+          nullable: true
+        javaXmxBytes:
+          type: string
+          nullable: true
+        javaMaxPermSize:
+          type: string
+          nullable: true
+        totalRamAvailableBytes:
+          type: string
+          nullable: true
+        locale:
+          type: string
+          nullable: true
+        username:
+          type: string
+          nullable: true
+        publicIp:
+          type: string
+          nullable: true
+        ideVersion:
+          type: string
+          nullable: true
+        gradleVersion:
+          type: string
+          nullable: true
+        localCacheHit:
+          type: integer
+          format: int32
+        localCacheMiss:
+          type: integer
+          format: int32
+        remoteCacheHit:
+          type: integer
+          format: int32
+        remoteCacheMiss:
+          type: integer
+          format: int32
+        gitBranch:
+          type: string
+          nullable: true
+        gitUser:
+          type: string
+          nullable: true
+        hostName:
+          type: string
+          nullable: true
+        osManufacturer:
+          type: string
+          nullable: true
+        durationMs:
+          type: string
+          nullable: true
+        configurationDurationMs:
+          type: string
+          nullable: true
+        rootProject:
+          type: string
+          nullable: true
+        requestedTasks:
+          type: string
+          nullable: true
+        success:
+          type: boolean
+        date:
+          type: string
+          format: date-time
+      additionalProperties: false
+    JestSnapshot:
+      required:
+        - added
+        - didUpdate
+        - failure
+        - fileDeleted
+        - filesAdded
+        - filesRemoved
+        - filesRemovedList
+        - filesUnmatched
+        - filesUpdated
+        - matched
+        - total
+        - unchecked
+        - uncheckedKeys
+        - uncheckedKeysByFile
+        - unmatched
+        - updated
+      type: object
+      properties:
+        added:
+          type: integer
+          format: int32
+        didUpdate:
+          type: boolean
+        failure:
+          type: boolean
+        filesAdded:
+          type: integer
+          format: int32
+        filesRemoved:
+          type: integer
+          format: int32
+        filesRemovedList:
+          type: array
+          items: {}
+          nullable: true
+        filesUnmatched:
+          type: integer
+          format: int32
+        filesUpdated:
+          type: integer
+          format: int32
+        matched:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+        unchecked:
+          type: integer
+          format: int32
+        uncheckedKeysByFile:
+          type: array
+          items: {}
+          nullable: true
+        unmatched:
+          type: integer
+          format: int32
+        updated:
+          type: integer
+          format: int32
+        fileDeleted:
+          type: boolean
+        uncheckedKeys:
+          type: array
+          items: {}
+          nullable: true
+      additionalProperties: false
+    JestTestCasePayload:
+      required:
+        - branch
+        - cpuCount
+        - gitCommitDate
+        - gitHeadCommit
+        - hostname
+        - id
+        - isDebuggerAttached
+        - os
+        - osVersion
+        - platform
+        - projectName
+        - repository
+        - repositoryName
+        - testCaseSummary
+        - testRunner
+        - testRunnerVersion
+        - userName
+      type: object
+      properties:
+        testCaseSummary:
+          $ref: '#/components/schemas/JestTestCaseSummary'
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: integer
+          format: int32
+        os:
+          type: string
+          nullable: true
+        osVersion:
+          type: string
+          nullable: true
+        branch:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        repository:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+        gitCommitDate:
+          type: string
+          nullable: true
+        gitHeadCommit:
+          type: string
+          nullable: true
+        testRunner:
+          type: string
+          nullable: true
+        testRunnerVersion:
+          type: string
+          nullable: true
+        isDebuggerAttached:
+          type: boolean
+      additionalProperties: false
+    JestTestCaseSummary:
+      required:
+        - jestSnapshot
+        - numFailedTests
+        - numFailedTestSuites
+        - numPassedTests
+        - numPassedTestSuites
+        - numPendingTests
+        - numPendingTestSuites
+        - numRuntimeErrorTestSuites
+        - numTodoTests
+        - numTotalTests
+        - numTotalTestSuites
+        - openHandles
+        - startTime
+        - success
+        - testResults
+        - wasInterrupted
+      type: object
+      properties:
+        numFailedTestSuites:
+          type: integer
+          format: int32
+        numFailedTests:
+          type: integer
+          format: int32
+        numPassedTestSuites:
+          type: integer
+          format: int32
+        numPassedTests:
+          type: integer
+          format: int32
+        numPendingTestSuites:
+          type: integer
+          format: int32
+        numPendingTests:
+          type: integer
+          format: int32
+        numRuntimeErrorTestSuites:
+          type: integer
+          format: int32
+        numTodoTests:
+          type: integer
+          format: int32
+        numTotalTestSuites:
+          type: integer
+          format: int32
+        numTotalTests:
+          type: integer
+          format: int32
+        openHandles:
+          type: array
+          items: {}
+          nullable: true
+        jestSnapshot:
+          $ref: '#/components/schemas/JestSnapshot'
+        startTime:
+          type: integer
+          format: int64
+        success:
+          type: boolean
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/JestTestResultParent'
+          nullable: true
+        wasInterrupted:
+          type: boolean
+      additionalProperties: false
+    JestTestResult:
+      required:
+        - ancestorTitles
+        - failureDetails
+        - failureMessages
+        - fullName
+        - invocations
+        - location
+        - numPassingAsserts
+        - retryReasons
+        - status
+        - title
+      type: object
+      properties:
+        ancestorTitles:
+          type: array
+          items:
+            type: string
+          nullable: true
+        duration:
+          type: integer
+          format: int32
+          nullable: true
+        failureDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/FailureDetail'
+          nullable: true
+        failureMessages:
+          type: array
+          items:
+            type: string
+          nullable: true
+        fullName:
+          type: string
+          nullable: true
+        invocations:
+          type: integer
+          format: int32
+        location:
+          nullable: true
+        numPassingAsserts:
+          type: integer
+          format: int32
+        retryReasons:
+          type: array
+          items: {}
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+      additionalProperties: false
+    JestTestResultParent:
+      required:
+        - failureMessage
+        - jestSnapshot
+        - leaks
+        - numFailingTests
+        - numPassingTests
+        - numPendingTests
+        - numTodoTests
+        - openHandles
+        - perfStats
+        - skipped
+        - testFilePath
+        - testResults
+      type: object
+      properties:
+        leaks:
+          type: boolean
+        numFailingTests:
+          type: integer
+          format: int32
+        numPassingTests:
+          type: integer
+          format: int32
+        numPendingTests:
+          type: integer
+          format: int32
+        numTodoTests:
+          type: integer
+          format: int32
+        openHandles:
+          type: array
+          items: {}
+          nullable: true
+        perfStats:
+          $ref: '#/components/schemas/PerfStats'
+        skipped:
+          type: boolean
+        jestSnapshot:
+          $ref: '#/components/schemas/JestSnapshot'
+        testFilePath:
+          type: string
+          nullable: true
+        testResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/JestTestResult'
+          nullable: true
+        failureMessage:
+          nullable: true
+      additionalProperties: false
+    JUnitFailure:
+      required:
+        - message
+        - type
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+      additionalProperties: false
+    JUnitTestCase:
+      required:
+        - classname
+        - duration
+        - endTime
+        - fullname
+        - id
+        - methodname
+        - name
+        - result
+        - startTime
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        fullname:
+          type: string
+          nullable: true
+        methodname:
+          type: string
+          nullable: true
+        classname:
+          type: string
+          nullable: true
+        result:
+          type: string
+          nullable: true
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          format: int64
+      additionalProperties: false
+    MatcherResult:
+      required:
+        - actual
+        - expected
+        - name
+        - pass
+      type: object
+      properties:
+        actual:
+          type: string
+          nullable: true
+        expected:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        pass:
+          type: boolean
+      additionalProperties: false
+    NUnitTestCase:
+      required:
+        - asserts
+        - classname
+        - duration
+        - endTime
+        - fullname
+        - id
+        - methodname
+        - name
+        - parentId
+        - result
+        - runstate
+        - seed
+        - startTime
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        fullname:
+          type: string
+          nullable: true
+        methodname:
+          type: string
+          nullable: true
+        classname:
+          type: string
+          nullable: true
+        runstate:
+          type: string
+          nullable: true
+        seed:
+          type: integer
+          format: int32
+        result:
+          type: string
+          nullable: true
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        duration:
+          type: number
+          format: double
+        asserts:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    NUnitTestCasePayload:
+      required:
+        - branch
+        - cpuCount
+        - hostname
+        - id
+        - isDebuggerAttached
+        - nUnitTestCases
+        - os
+        - platform
+        - projectName
+        - repository
+        - repositoryName
+        - runId
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: integer
+          format: int32
+        os:
+          type: string
+          nullable: true
+        branch:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        repository:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+        isDebuggerAttached:
+          type: boolean
+        nUnitTestCases:
+          type: array
+          items:
+            $ref: '#/components/schemas/NUnitTestCase'
+          nullable: true
+        runId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PerfStats:
+      required:
+        - end
+        - runtime
+        - slow
+        - start
+      type: object
+      properties:
+        end:
+          type: integer
+          format: int64
+        runtime:
+          type: integer
+          format: int32
+        slow:
+          type: boolean
+        start:
+          type: integer
+          format: int64
+      additionalProperties: false
+    SbtScalaTestCase:
+      required:
+        - className
+        - message
+        - name
+        - stackTrace
+        - status
+        - time
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        className:
+          type: string
+          nullable: true
+        time:
+          type: number
+          format: double
+        status:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        stackTrace:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ScalaProfileData:
+      required:
+        - context
+      type: object
+      properties:
+        context:
+          $ref: '#/components/schemas/ScalaProfileDataContext'
+      additionalProperties: false
+    ScalaProfileDataContext:
+      required:
+        - execTime
+        - execTimestamp
+        - gitBranch
+        - gitHeadCommit
+        - gitHeadCommitDate
+        - gitRepository
+        - osArch
+        - osName
+        - osVersion
+        - processors
+        - taskName
+        - user
+      type: object
+      properties:
+        user:
+          type: string
+          nullable: true
+        osName:
+          type: string
+          nullable: true
+        osVersion:
+          type: string
+          nullable: true
+        osArch:
+          type: string
+          nullable: true
+        processors:
+          type: integer
+          format: int32
+        gitRepository:
+          type: string
+          nullable: true
+        gitBranch:
+          type: string
+          nullable: true
+        gitHeadCommit:
+          type: string
+          nullable: true
+        gitHeadCommitDate:
+          type: string
+          format: date-time
+        taskName:
+          type: string
+          nullable: true
+        execTime:
+          type: integer
+          format: int32
+        execTimestamp:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ScalaTestCase:
+      required:
+        - duration
+        - endTime
+        - id
+        - name
+        - startTime
+        - status
+        - suiteName
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        suiteName:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ScalaTestCasePayload:
+      required:
+        - cpuCount
+        - gitBranch
+        - gitRepository
+        - hostname
+        - id
+        - isDebuggerAttached
+        - os
+        - platform
+        - projectName
+        - runId
+        - testCases
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        runId:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        gitRepository:
+          type: string
+          nullable: true
+        gitBranch:
+          type: string
+          nullable: true
+        isDebuggerAttached:
+          type: boolean
+        testCases:
+          type: array
+          items:
+            $ref: '#/components/schemas/SbtScalaTestCase'
+          nullable: true
+      additionalProperties: false
+    ScalaTestPayload:
+      required:
+        - abortedSuites
+        - branch
+        - canceledTests
+        - completedSuites
+        - cpuCount
+        - failedTests
+        - hostname
+        - id
+        - ignoredTests
+        - isDebuggerAttached
+        - os
+        - pendingScopes
+        - pendingTests
+        - platform
+        - projectName
+        - repositoryName
+        - repositoryUrl
+        - runId
+        - runTime
+        - scalaTestCases
+        - succeededTests
+        - totalTests
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        platform:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        isDebuggerAttached:
+          type: boolean
+        scalaTestCases:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScalaTestCase'
+          nullable: true
+        totalTests:
+          type: integer
+          format: int32
+        succeededTests:
+          type: integer
+          format: int32
+        failedTests:
+          type: integer
+          format: int32
+        ignoredTests:
+          type: integer
+          format: int32
+        pendingTests:
+          type: integer
+          format: int32
+        canceledTests:
+          type: integer
+          format: int32
+        completedSuites:
+          type: integer
+          format: int32
+        abortedSuites:
+          type: integer
+          format: int32
+        pendingScopes:
+          type: integer
+          format: int32
+        runTime:
+          type: integer
+          format: int32
+        runId:
+          type: string
+          nullable: true
+        branch:
+          type: string
+          nullable: true
+        repositoryUrl:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TestRunData:
+      required:
+        - branch
+        - cpuCount
+        - hostname
+        - id
+        - isDebuggerAttached
+        - jUnitTestCases
+        - os
+        - platform
+        - projectName
+        - repository
+        - repositoryName
+        - runId
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        branch:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        repository:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+        isDebuggerAttached:
+          type: boolean
+        jUnitTestCases:
+          type: array
+          items:
+            $ref: '#/components/schemas/JUnitTestCase'
+          nullable: true
+        runId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ViteBuild:
+      required:
+        - branch
+        - builtAt
+        - commitSha
+        - cpuCount
+        - cpuModels
+        - cpuSpeed
+        - customIdentifier
+        - hostname
+        - id
+        - nodeVersion
+        - os
+        - platform
+        - projectName
+        - repository
+        - repositoryName
+        - timestamp
+        - timeTaken
+        - totalMemory
+        - type
+        - userName
+        - v8Version
+        - viteVersion
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        timeTaken:
+          type: integer
+          format: int32
+        branch:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        repository:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+        timestamp:
+          type: integer
+          format: int64
+        builtAt:
+          type: string
+          format: date-time
+        totalMemory:
+          type: integer
+          format: int64
+        cpuModels:
+          type: array
+          items:
+            type: string
+          nullable: true
+        cpuSpeed:
+          type: array
+          items:
+            type: integer
+            format: int32
+          nullable: true
+        nodeVersion:
+          type: string
+          nullable: true
+        v8Version:
+          type: string
+          nullable: true
+        viteVersion:
+          type: string
+          nullable: true
+        commitSha:
+          type: string
+          nullable: true
+        customIdentifier:
+          type: string
+          nullable: true
+      additionalProperties: false
+    VitestPayload:
+      required:
+        - branch
+        - builtAt
+        - commitSha
+        - cpuCount
+        - cpuModels
+        - cpuSpeed
+        - customIdentifier
+        - files
+        - hostname
+        - id
+        - maxConcurrency
+        - mode
+        - nodeVersion
+        - os
+        - platform
+        - projectName
+        - repository
+        - repositoryName
+        - runId
+        - testCases
+        - testEnvironment
+        - timestamp
+        - timeTaken
+        - totalMemory
+        - type
+        - userName
+        - v8Version
+        - vitestVersion
+        - watchMode
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        timeTaken:
+          type: integer
+          format: int32
+        branch:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        repository:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+        timestamp:
+          type: integer
+          format: int64
+        builtAt:
+          type: string
+          format: date-time
+        totalMemory:
+          type: integer
+          format: int64
+        cpuModels:
+          type: array
+          items:
+            type: string
+          nullable: true
+        cpuSpeed:
+          type: array
+          items:
+            type: integer
+            format: int32
+          nullable: true
+        nodeVersion:
+          type: string
+          nullable: true
+        v8Version:
+          type: string
+          nullable: true
+        commitSha:
+          type: string
+          nullable: true
+        customIdentifier:
+          type: string
+          nullable: true
+        vitestVersion:
+          type: string
+          nullable: true
+        mode:
+          type: string
+          nullable: true
+        maxConcurrency:
+          type: integer
+          format: int32
+        watchMode:
+          type: boolean
+        testEnvironment:
+          type: string
+          nullable: true
+        runId:
+          type: string
+          nullable: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/VitestTestFile'
+          nullable: true
+        testCases:
+          type: array
+          items:
+            $ref: '#/components/schemas/VitestTestCase'
+          nullable: true
+      additionalProperties: false
+    VitestTestCase:
+      required:
+        - duration
+        - errorMessage
+        - filename
+        - name
+        - startTime
+        - status
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        startTime:
+          type: integer
+          format: int64
+        duration:
+          type: integer
+          format: int32
+        errorMessage:
+          type: array
+          items:
+            type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+      additionalProperties: false
+    VitestTestFile:
+      required:
+        - duration
+        - name
+        - startTime
+        - status
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        collectDuration:
+          type: integer
+          format: int32
+          nullable: true
+        setupDuration:
+          type: integer
+          format: int32
+          nullable: true
+        prepareDuration:
+          type: number
+          format: double
+          nullable: true
+        environmentLoad:
+          type: number
+          format: double
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        startTime:
+          type: integer
+          format: int64
+        duration:
+          type: integer
+          format: int32
+      additionalProperties: false
+    WebpackStats:
+      required:
+        - branch
+        - builtAt
+        - commitSha
+        - compilationHash
+        - cpuCount
+        - cpuModels
+        - cpuSpeed
+        - customIdentifier
+        - hostname
+        - id
+        - nbrOfCachedModules
+        - nbrOfRebuiltModules
+        - nodeVersion
+        - os
+        - platform
+        - projectName
+        - repository
+        - repositoryName
+        - timestamp
+        - timeTaken
+        - totalMemory
+        - type
+        - userName
+        - v8Version
+        - webpackVersion
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        compilationHash:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        cpuCount:
+          type: integer
+          format: int32
+        hostname:
+          type: string
+          nullable: true
+        platform:
+          type: string
+          nullable: true
+        os:
+          type: string
+          nullable: true
+        timeTaken:
+          type: integer
+          format: int32
+        branch:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        repository:
+          type: string
+          nullable: true
+        repositoryName:
+          type: string
+          nullable: true
+        timestamp:
+          type: integer
+          format: int64
+        builtAt:
+          type: string
+          format: date-time
+        totalMemory:
+          type: integer
+          format: int64
+        cpuModels:
+          type: array
+          items:
+            type: string
+          nullable: true
+        cpuSpeed:
+          type: array
+          items:
+            type: integer
+            format: int32
+          nullable: true
+        nodeVersion:
+          type: string
+          nullable: true
+        v8Version:
+          type: string
+          nullable: true
+        webpackVersion:
+          type: string
+          nullable: true
+        commitSha:
+          type: string
+          nullable: true
+        nbrOfCachedModules:
+          type: integer
+          format: int32
+        nbrOfRebuiltModules:
+          type: integer
+          format: int32
+        customIdentifier:
+          type: string
+          nullable: true
+      additionalProperties: false
